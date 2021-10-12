@@ -67,14 +67,14 @@ const Image = styled.img`
 `;
 
 const Nav = () => {
-  // const user = true;
+  const user = true;
   return (
     <Container>
       <Left>
         <Facebook
           sx={{
             fontSize: 20,
-            mr: 10,
+            mr: 1,
             color: '#444',
             cursor: 'pointer',
           }}
@@ -82,7 +82,7 @@ const Nav = () => {
         <Instagram
           sx={{
             fontSize: 20,
-            mr: 10,
+            mr: 1,
             color: '#444',
             cursor: 'pointer',
           }}
@@ -90,7 +90,7 @@ const Nav = () => {
         <Pinterest
           sx={{
             fontSize: 20,
-            mr: 10,
+            mr: 1,
             color: '#444',
             cursor: 'pointer',
           }}
@@ -98,7 +98,7 @@ const Nav = () => {
         <Twitter
           sx={{
             fontSize: 20,
-            mr: 10,
+            mr: 1,
             color: '#444',
             cursor: 'pointer',
           }}
@@ -107,31 +107,54 @@ const Nav = () => {
       <Center>
         <Menu>
           <MenuItem>
-            <Link to="/">HOME</Link>
+            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
+              HOME
+            </Link>
           </MenuItem>
           <MenuItem>ABOUT</MenuItem>
           <MenuItem>CONTACT</MenuItem>
           <MenuItem>
-            <Link to="/write">WRITE</Link>
+            <Link
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              to="/write"
+            >
+              WRITE
+            </Link>
           </MenuItem>
           <MenuItem>LOGOUT</MenuItem>
         </Menu>
       </Center>
       <Right>
-        <Link to="/settings">
-          <Image src=""></Image>
-        </Link>
-        <Menu>
-          <MenuItem>
-            <Link to="/login">LOGIN</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/register">REGISTER</Link>
-          </MenuItem>
-        </Menu>
+        {user ? (
+          <Link
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            to="/settings"
+          >
+            <Image src="https://i.ibb.co/jwcV8fw/man.jpg"></Image>
+          </Link>
+        ) : (
+          <Menu>
+            <MenuItem>
+              <Link
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                to="/login"
+              >
+                LOGIN
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                to="/register"
+              >
+                REGISTER
+              </Link>
+            </MenuItem>
+          </Menu>
+        )}
         <Search
           sx={{
-            fontSize: 18,
+            fontSize: 24,
             color: '#666',
             cursor: 'pointer',
           }}
