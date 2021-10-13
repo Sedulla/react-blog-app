@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
 import HomePage from './pages/HomePage';
 import SinglePage from './pages/SinglePage';
+import Write from './pages/Write';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <Nav />
       <Switch>
         <Route>
-          <SinglePage />
+          <Write />
         </Route>
       </Switch>
     </Router>
