@@ -36,8 +36,8 @@ const Title = styled.span`
 
 const Image = styled.img`
   margin-top: 15px;
-  height: 350px;
-  width: 280px;
+  height: 250px;
+  width: 250px;
 `;
 
 const Text = styled.p`
@@ -69,7 +69,7 @@ const SideSection = () => {
     <Container>
       <Item>
         <Title>ABOUT ME</Title>
-        <Image src="https://i.ibb.co/CVT424D/pexels-marta-dzedyshko-7421244.jpg"></Image>
+        <Image src="https://i.ibb.co/p3xdqc3/about-me.jpg"></Image>
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quae
           sapiente voluptatum sectetur adipisicing.

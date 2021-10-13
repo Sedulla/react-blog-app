@@ -35,12 +35,14 @@ const Category = styled.span`
 `;
 
 const Title = styled.span`
-  font-family: 'Varela', Arial, Helvetica, sans-serif;
+  font-family: 'Varela', Arial, sans-serif;
   font-size: 24px;
   font-weight: 900;
   margin-top: 15px;
   cursor: pointer;
 `;
+
+const Hr = styled.hr``;
 
 const PDate = styled.span`
   font-family: 'Raleway', serif;
@@ -52,7 +54,7 @@ const PDate = styled.span`
 `;
 
 const Description = styled.p`
-  font-family: 'Varela', Arial, Helvetica, sans-serif;
+  font-family: 'Varela', Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
@@ -87,7 +89,7 @@ const Post = ({ img }) => {
             Lorem ipsum dolor sit amet.
           </Link>
         </Title>
-        <hr />
+        <Hr />
         <PDate>1 hour ago</PDate>
         <Description>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, earum

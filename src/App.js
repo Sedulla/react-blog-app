@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
 import HomePage from './pages/HomePage';
+import SinglePage from './pages/SinglePage';
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Nav />
       <Switch>
         <Route>
-          <HomePage />
+          <SinglePage />
         </Route>
       </Switch>
     </Router>
