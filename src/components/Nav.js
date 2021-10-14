@@ -68,6 +68,7 @@ const Image = styled.img`
 
 const Nav = () => {
   const user = true;
+
   return (
     <Container>
       <Left>
@@ -107,7 +108,7 @@ const Nav = () => {
       <Center>
         <Menu>
           <MenuItem>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
+            <Link className="link" to="/">
               HOME
             </Link>
           </MenuItem>
@@ -115,7 +116,7 @@ const Nav = () => {
           <MenuItem>CONTACT</MenuItem>
           <MenuItem>
             <Link
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              className="link"
               to="/write"
             >
               WRITE
@@ -127,7 +128,7 @@ const Nav = () => {
       <Right>
         {user ? (
           <Link
-            style={{ textDecoration: 'none', color: 'inherit' }}
+            className="link"
             to="/settings"
           >
             <Image src="https://i.ibb.co/jwcV8fw/man.jpg"></Image>
@@ -136,7 +137,7 @@ const Nav = () => {
           <Menu>
             <MenuItem>
               <Link
-                style={{ textDecoration: 'none', color: 'inherit' }}
+                className="link"
                 to="/login"
               >
                 LOGIN
@@ -144,7 +145,7 @@ const Nav = () => {
             </MenuItem>
             <MenuItem>
               <Link
-                style={{ textDecoration: 'none', color: 'inherit' }}
+                className="link"
                 to="/register"
               >
                 REGISTER

@@ -80,32 +80,32 @@ const SideSection = () => {
         <Title>CATEGORIES</Title>
         <List>
           <ListItem>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+            <Link className="link" to="">
               Life
             </Link>
           </ListItem>
           <ListItem>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+            <Link className="link" to="">
               Sport
             </Link>
           </ListItem>
           <ListItem>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+            <Link className="link" to="">
               Tech
             </Link>
           </ListItem>
           <ListItem>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+            <Link className="link" to="">
               Life
             </Link>
           </ListItem>
           <ListItem>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+            <Link className="link" to="">
               Life
             </Link>
           </ListItem>
           <ListItem>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+            <Link className="link" to="">
               Life
             </Link>
           </ListItem>

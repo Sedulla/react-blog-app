@@ -74,7 +74,7 @@ const SinglePost = () => {
           <Span>
             Author:
             <Author>
-              <Link style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link className="link">
                 Sedulla
               </Link>
             </Author>

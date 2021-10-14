@@ -74,18 +74,18 @@ const Post = ({ img }) => {
       <Info>
         <Categories>
           <Category>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+            <Link className="link" to="/post?/cat/Life">
               Life
             </Link>
           </Category>
           <Category>
-            <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+            <Link className="link" to="/post?/cat/Life">
               Plant
             </Link>
           </Category>
         </Categories>
         <Title>
-          <Link style={{ textDecoration: 'none', color: 'inherit' }} to="">
+          <Link className="link" to="/post/abc">
             Lorem ipsum dolor sit amet.
           </Link>
         </Title>
