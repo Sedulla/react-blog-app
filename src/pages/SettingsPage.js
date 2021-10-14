@@ -2,21 +2,89 @@ import styled from 'styled-components';
 import SideSection from '../components/SideSection';
 import { AccountCircle } from '@mui/icons-material';
 
-const Container = styled.div``;
-const Wrapper = styled.div``;
-const Titles = styled.div``;
-const UpdateTitle = styled.div``;
-const DeleteTitle = styled.div``;
-const Form = styled.div``;
-const Label = styled.div``;
-const ProfilePicture = styled.div``;
-const Image = styled.div``;
-const LabelForFileInput = styled.div``;
-const FileInput = styled.div``;
-const NameInput = styled.div``;
-const EmailInput = styled.div``;
-const PasswordInput = styled.div``;
-const SubmitButton = styled.div``;
+const Container = styled.div`
+  display: flex;
+`;
+
+const Wrapper = styled.div`
+  flex: 9;
+  padding: 20px;
+`;
+
+const Titles = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const UpdateTitle = styled.span`
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #f08080;
+`;
+
+const DeleteTitle = styled.span`
+  color: #ff0000;
+  font-size: 12px;
+  cursor: pointer;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.label`
+  font-size: 20px;
+  margin-top: 20px;
+`;
+
+const LabelForFileInput = styled.label``;
+
+const ProfilePicture = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
+const PPImage = styled.img`
+  height: 70px;
+  width: 70px;
+  border-radius: 20px;
+  object-fit: cover;
+`;
+
+const Input = styled.input`
+  color: gray;
+  margin-top: 10px;
+  margin-top: 10px;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid #d3d3d3;
+`;
+
+const FileInput = styled(Input)`
+  width: 30%;
+`;
+
+const SubmitButton = styled.button`
+  align-self: center;
+  width: 150px;
+  border: none;
+  color: #fff;
+  background-color: #008080;
+  padding: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #017272;
+  }
+`;
 
 const SettingsPage = () => {
   return (
@@ -29,22 +97,33 @@ const SettingsPage = () => {
         <Form>
           <Label>Profile Picture</Label>
           <ProfilePicture>
-            <Image src="https://i.ibb.co/jwcV8fw/man.jpg" alt=""></Image>
+            <PPImage src="https://i.ibb.co/jwcV8fw/man.jpg" alt=""></PPImage>
             <LabelForFileInput htmlFor="fileInput">
-              <AccountCircle />
+              <AccountCircle
+                sx={{
+                  width: '20px',
+                  height: '20px',
+                  p: '5px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  border: 'none',
+                  borderRadius: '50%',
+                  ml: '10px',
+                  color: '#fff',
+                  backgroundColor: '#f08080',
+                  cursor: 'pointer',
+                }}
+              />
             </LabelForFileInput>
             <FileInput id="fileInput" type="file" style={{ display: 'none' }} />
           </ProfilePicture>
           <Label>Username</Label>
-          <NameInput type="text" name="name" placeholder="Ahmed" />
+          <Input type="text" name="name" placeholder="Ahmed" />
           <Label>Email</Label>
-          <EmailInput type="email" name="email" placeholder="ahmed@gmail.com" />
+          <Input type="email" name="email" placeholder="ahmed@gmail.com" />
           <Label>Password</Label>
-          <PasswordInput
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
+          <Input type="password" name="password" placeholder="Password" />
           <SubmitButton type="submit">Update</SubmitButton>
         </Form>
       </Wrapper>
