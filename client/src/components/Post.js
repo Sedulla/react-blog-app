@@ -70,7 +70,7 @@ const Description = styled.p`
 const Post = ({ img }) => {
   return (
     <Container>
-      <Image src={img} alt=""></Image>
+      <Image src={img} alt="" />
       <Info>
         <Categories>
           <Category>
