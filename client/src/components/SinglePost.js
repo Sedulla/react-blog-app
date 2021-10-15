@@ -74,9 +74,7 @@ const SinglePost = () => {
           <Span>
             Author:
             <Author>
-              <Link className="link">
-                Sedulla
-              </Link>
+              <Link className="link">Sedulla</Link>
             </Author>
           </Span>
           <Span>1 day ago</Span>
