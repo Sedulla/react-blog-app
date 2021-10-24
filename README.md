@@ -1,3 +1,13 @@
+Complete the UI and working with backend...
+## Home Page
+![image](https://user-images.githubusercontent.com/67521243/137536310-b74949a7-e8b3-4ba1-9234-7123f8d8e25d.png)
+## Write Page
+![image](https://user-images.githubusercontent.com/67521243/137536903-7a4cf7f1-06f1-419e-8e35-990bf64d1c94.png)
+## Settings Page
+![image](https://user-images.githubusercontent.com/67521243/137536930-03a0318b-b36e-4c49-8719-cc844fdd68fe.png)
+
+
+
 # Getting Started with New React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
