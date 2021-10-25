@@ -59,7 +59,6 @@ const Description = styled.p`
     font-weight: 600;
   }
 `;
-const Br = styled.br``;
 
 const SinglePost = () => {
   const location = useLocation();

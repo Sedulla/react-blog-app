@@ -1,4 +1,7 @@
+import axios from 'axios';
+import { useContext, useRef } from 'react';
 import styled from 'styled-components';
+import { Context } from '../context/Context';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -51,6 +54,11 @@ const LoginButton = styled(Button)`
   margin-top: 20px;
   background-color: #f08080;
   text-align: center;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: rgb(252, 173, 173);
+  }
 `;
 
 const RegisterButton = styled(Button)`
@@ -61,15 +69,35 @@ const RegisterButton = styled(Button)`
 `;
 
 const LoginPage = () => {
+  const userRef = useRef();
+  const passwordRef = useRef();
+  const { dispatch, isFetching } = useContext(Context);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch({ type: 'LOGIN_START' });
+    try {
+      const res = await axios.post('/auth/login', {
+        username: userRef.current.value,
+        password: passwordRef.current.value,
+      });
+      dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
+    } catch (err) {
+      dispatch({ type: 'LOGIN_FAILURE' });
+    }
+  };
+
   return (
     <Container>
       <Title>Login</Title>
-      <Form>
-        <Label>Email</Label>
-        <Input type="text" placeholder="Enter your email..." />
+      <Form onSubmit={handleSubmit}>
+        <Label>Username</Label>
+        <Input type="text" placeholder="Enter your username..." />
         <Label>Password</Label>
         <Input type="password" placeholder="Enter your password..." />
-        <LoginButton>Login</LoginButton>
+        <LoginButton type="submit" disabled={isFetching}>
+          Login
+        </LoginButton>
       </Form>
       <RegisterButton>Register</RegisterButton>
     </Container>
