@@ -67,37 +67,22 @@ const Description = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-const Post = ({ img }) => {
+const Post = ({ post }) => {
   return (
     <Container>
-      <Image src={img} alt="" />
+      {post.photo && <Image src={post.photo} alt="" />}
       <Info>
         <Categories>
-          <Category>
-            <Link className="link" to="/post?/cat/Life">
-              Life
-            </Link>
-          </Category>
-          <Category>
-            <Link className="link" to="/post?/cat/Life">
-              Plant
-            </Link>
-          </Category>
+          {post.categories.map((c)=>(
+            <Category>{c.name}</Category>
+          ))}
         </Categories>
-        <Title>
-          <Link className="link" to="/post/abc">
-            Lorem ipsum dolor sit amet.
-          </Link>
-        </Title>
+        <Link className="link" to={`/post/${post._id}`}>
+          <Title>{post.title}</Title>
+        </Link>
         <Hr />
-        <PDate>1 hour ago</PDate>
-        <Description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, earum
-          porro sint hic voluptate doloremque iusto ratione molestiae ex. Omnis
-          natus, corporis deserunt inventore facere aliquid vero nihil quis
-          porro sint hic voluptate doloremque iusto ratione molestiae ex. Omnis
-          rerum hic voluptate doloremque iusto rat
-        </Description>
+        <PDate>{new Date(post.date).toDateString()}</PDate>
+        <Description>{post.desc}</Description>
       </Info>
     </Container>
   );

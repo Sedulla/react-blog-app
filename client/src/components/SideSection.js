@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Facebook, Instagram, Pinterest, Twitter } from '@mui/icons-material';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const Container = styled.div`
   flex: 3;
@@ -65,6 +68,16 @@ const SocialIcons = styled.li`
 `;
 
 const SideSection = () => {
+  const [cats, setCats] = useState([]);
+
+  useEffect(() => {
+    const getCats = async () => {
+      const res = await axios.get('./categories');
+      setCats(res.data);
+    };
+    getCats();
+  }, []);
+
   return (
     <Container>
       <Item>
@@ -79,39 +92,13 @@ const SideSection = () => {
       <Item>
         <Title>CATEGORIES</Title>
         <List>
-          <ListItem>
-            <Link className="link" to="">
-              Life
+          {cats.map((c) => (
+            <Link to={`/?cat=${c.name}`} className="link">
+              <ListItem>{c.name}</ListItem>
             </Link>
-          </ListItem>
-          <ListItem>
-            <Link className="link" to="">
-              Sport
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link className="link" to="">
-              Tech
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link className="link" to="">
-              Life
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link className="link" to="">
-              Life
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link className="link" to="">
-              Life
-            </Link>
-          </ListItem>
+          ))}
         </List>
       </Item>
-
       <Item>
         <Title>FOLLOW US</Title>
         <SocialIcons>

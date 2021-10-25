@@ -1,6 +1,9 @@
-import { Delete, Edit } from '@mui/icons-material';
+import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Delete, Edit } from '@mui/icons-material';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Container = styled.div`
   flex: 9;
@@ -59,55 +62,43 @@ const Description = styled.p`
 const Br = styled.br``;
 
 const SinglePost = () => {
+  const location = useLocation();
+  const path = location.pathname.split('/')[2];
+  const [post, setPost] = useState({});
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get('/posts/', path);
+      setPost(res.data);
+      setPost(res.data.title);
+      setPost(res.data.desc);
+    };
+    getPost();
+  }, [path]);
+
   return (
     <Container>
       <Wrapper>
-        <Image src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+        {post.photo && <Image src={post.photo} />}
         <Title>
-          Lorem ipsum dolor
+          {title}
           <EditIcons>
             <Edit sx={{ ml: 1, cursor: 'pointer', color: 'teal' }} />
             <Delete sx={{ ml: 1, cursor: 'pointer', color: 'tomato' }} />
           </EditIcons>
         </Title>
         <Info>
-          <Span>
+          <Author>
             Author:
-            <Author>
-              <Link className="link">Sedulla</Link>
-            </Author>
-          </Span>
-          <Span>1 day ago</Span>
+            <Link to={`/?user=$post{post.username}`} className="link">
+              <b>{post.username}</b>
+            </Link>
+          </Author>
+          <Span>{new Date(post.date).toDateString()}</Span>
         </Info>
-        <Description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos vero
-          perferendis temporibus officia facere modi, consequuntur explicabo est
-          rerum, quae alias ab accusamus nisi tempore eligendi quidem. Quaerat
-          aliquid velit perspiciatis cumque, tenetur facilis magni soluta, odit
-          in amet eius corporis eaque impedit quibusdam magnam odio ad ducimus
-          incidunt dolorum unde? Accusamus eum fugit quae quasi, modi nobis
-          dignissimos culpa veritatis animi consequatur dolorem? Temporibus,
-          illo? Voluptatem beatae error libero dignissimos, reiciendis, qui eos
-          aspernatur eligendi ea odio totam nisi eveniet officia aliquam tenetur
-          illo? Voluptatem beatae error libero dignissimos, reiciendis, qui eos
-          in amet eius corporis eaque impedit quibusdam magnam odio ad ducimus
-          illo? Voluptatem beatae error libero dignissimos, reiciendis, qui eos
-          illo? Voluptatem beatae error libero dignissimos, reiciendis, qui eos
-          in amet eius corporis eaque impedit quibusdam magnam odio ad ducimus
-          dolor est facilis! Praesentium quia aut.
-          <Br />
-          <Br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos vero
-          perferendis temporibus officia facere modi, consequuntur explicabo est
-          rerum, quae alias ab accusamus nisi tempore eligendi quidem. Quaerat
-          aliquid velit perspiciatis cumque, tenetur facilis magni soluta, odit
-          in amet eius corporis eaque impedit quibusdam magnam odio ad ducimus
-          incidunt dolorum unde? Accusamus eum fugit quae quasi, modi nobis
-          dignissimos culpa veritatis animi impedit consequatur dolorem?
-          Temporibus, illo? Voluptatem, reiciendis, qui eos aspernatur eligendi
-          aliquam tenetur dolor est facilis! Praesentium quia aut asperiores
-          eos, rerum dicta doloribus in sint!
-        </Description>
+        <Description>{post.desc}</Description>
       </Wrapper>
     </Container>
   );
