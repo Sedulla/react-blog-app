@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import SideSection from '../components/SideSection';
 import { AccountCircle } from '@mui/icons-material';
+import { useState } from 'react';
+import { useContext } from 'react';
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -86,7 +89,48 @@ const SubmitButton = styled.button`
   }
 `;
 
+const Span = styled.span``;
+
 const SettingsPage = () => {
+  const [file, setFile] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  const { user, dispatch } = useContext(useContext);
+  const PF = 'http://localhost:5000/images/';
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch({ type: 'UPDATE_START' });
+    const updatedUser = {
+      userId: user._id,
+      username,
+      email,
+      password,
+    };
+
+    if (file) {
+      const data = new FormData();
+      const filename = Date.now() + file.name;
+      data.append('name', filename);
+      data.append('file', file);
+      updatedUser.profilePicture = filename;
+
+      try {
+        await axios.post('/upload', data);
+      } catch (err) {}
+    }
+    try {
+      const res = await axios.put('/users/' + user._id, updatedUser);
+      setSuccess(true);
+      dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
+    } catch (err) {
+      dispatch({ type: 'UPDATE_FAILURE' });
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -94,10 +138,13 @@ const SettingsPage = () => {
           <UpdateTitle>Update Your Account</UpdateTitle>
           <DeleteTitle>Delete Your Account</DeleteTitle>
         </Titles>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Label>Profile Picture</Label>
           <ProfilePicture>
-            <PPImage src="https://i.ibb.co/jwcV8fw/man.jpg" alt=""></PPImage>
+            <PPImage
+              src={file ? URL.createObjectURL(file) : PF + user.profilePicture}
+              alt=""
+            ></PPImage>
             <LabelForFileInput htmlFor="fileInput">
               <AccountCircle
                 sx={{
@@ -116,15 +163,42 @@ const SettingsPage = () => {
                 }}
               />
             </LabelForFileInput>
-            <FileInput id="fileInput" type="file" style={{ display: 'none' }} />
+            <FileInput
+              id="fileInput"
+              type="file"
+              style={{ display: 'none' }}
+              onChange={(e) => setFile(e.target.files[0])}
+            />
           </ProfilePicture>
           <Label>Username</Label>
-          <Input type="text" name="name" placeholder="Ahmed" />
+          <Input
+            type="text"
+            name="name"
+            placeholder="Ahmed"
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <Label>Email</Label>
-          <Input type="email" name="email" placeholder="ahmed@gmail.com" />
+          <Input
+            type="email"
+            name="email"
+            placeholder="ahmed@gmail.com"
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <Label>Password</Label>
-          <Input type="password" name="password" placeholder="Password" />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <SubmitButton type="submit">Update</SubmitButton>
+          {success && (
+            <Span
+              style={{ color: 'green', textAlign: 'center', marginTop: '20px' }}
+            >
+              Profile has been updated ...
+            </Span>
+          )}
         </Form>
       </Wrapper>
       <SideSection />

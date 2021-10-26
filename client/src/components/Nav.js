@@ -70,6 +70,7 @@ const Image = styled.img`
 
 const Nav = () => {
   const { user, dispatch } = useContext(Context);
+  const PF = 'http://localhost:5000/images/';
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -131,7 +132,7 @@ const Nav = () => {
       <Right>
         {user ? (
           <Link className="link" to="/settings">
-            <Image src={user.profilePicture}></Image>
+            <Image src={PF + user.profilePicture}></Image>
           </Link>
         ) : (
           <Menu>
