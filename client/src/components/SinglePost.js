@@ -2,8 +2,9 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Delete, Edit } from '@mui/icons-material';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { Context } from '../context/Context';
 
 const Container = styled.div`
   flex: 9;
@@ -66,30 +67,46 @@ const SinglePost = () => {
   const [post, setPost] = useState({});
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
+  const PF = 'http://localhost:5000/images/';
+  const { user } = useContext(Context);
 
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get('/posts/', path);
       setPost(res.data);
-      setPost(res.data.title);
-      setPost(res.data.desc);
+      setTitle(res.data.title);
+      setDesc(res.data.desc);
     };
     getPost();
   }, [path]);
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/posts/${post._id}`, {
+        data: { username: user.name },
+      });
+      window.location.replace('/');
+    } catch (err) {}
+  };
+
   return (
     <Container>
       <Wrapper>
-        {post.photo && <Image src={post.photo} />}
+        {post.photo && <Image src={PF + post.photo} />}
         <Title>
           {title}
-          <EditIcons>
-            <Edit sx={{ ml: 1, cursor: 'pointer', color: 'teal' }} />
-            <Delete sx={{ ml: 1, cursor: 'pointer', color: 'tomato' }} />
-          </EditIcons>
+          {post.username === user?.username && (
+            <EditIcons>
+              <Edit sx={{ ml: 1, cursor: 'pointer', color: 'teal' }} />
+              <Delete
+                sx={{ ml: 1, cursor: 'pointer', color: 'tomato' }}
+                onClick={handleDelete}
+              />
+            </EditIcons>
+          )}
         </Title>
         <Info>
-          <Author>
+          <Author value={desc}>
             Author:
             <Link to={`/?user=$post{post.username}`} className="link">
               <b>{post.username}</b>

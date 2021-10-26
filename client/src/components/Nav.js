@@ -7,6 +7,8 @@ import {
   Twitter,
   Search,
 } from '@mui/icons-material';
+import { useContext } from 'react';
+import { Context } from '../context/Context';
 
 const Container = styled.div`
   width: 100%;
@@ -67,7 +69,11 @@ const Image = styled.img`
 `;
 
 const Nav = () => {
-  const user = true;
+  const { user, dispatch } = useContext(Context);
+
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' });
+  };
 
   return (
     <Container>
@@ -115,39 +121,27 @@ const Nav = () => {
           <MenuItem>ABOUT</MenuItem>
           <MenuItem>CONTACT</MenuItem>
           <MenuItem>
-            <Link
-              className="link"
-              to="/write"
-            >
+            <Link className="link" to="/write">
               WRITE
             </Link>
           </MenuItem>
-          <MenuItem>LOGOUT</MenuItem>
+          <MenuItem onClick={handleLogout}>{user && 'LOGOUT'}</MenuItem>
         </Menu>
       </Center>
       <Right>
         {user ? (
-          <Link
-            className="link"
-            to="/settings"
-          >
-            <Image src="https://i.ibb.co/jwcV8fw/man.jpg"></Image>
+          <Link className="link" to="/settings">
+            <Image src={user.profilePicture}></Image>
           </Link>
         ) : (
           <Menu>
             <MenuItem>
-              <Link
-                className="link"
-                to="/login"
-              >
+              <Link className="link" to="/login">
                 LOGIN
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link
-                className="link"
-                to="/register"
-              >
+              <Link className="link" to="/register">
                 REGISTER
               </Link>
             </MenuItem>

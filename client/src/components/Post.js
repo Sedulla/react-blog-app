@@ -68,12 +68,14 @@ const Description = styled.p`
 `;
 
 const Post = ({ post }) => {
+  const PF = 'http://localhost:5000/images/';
+
   return (
     <Container>
-      {post.photo && <Image src={post.photo} alt="" />}
+      {post.photo && <Image src={PF + post.photo} alt="" />}
       <Info>
         <Categories>
-          {post.categories.map((c)=>(
+          {post.categories.map((c) => (
             <Category>{c.name}</Category>
           ))}
         </Categories>

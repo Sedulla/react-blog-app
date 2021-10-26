@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/Nav';
+import { Context } from './context/Context';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -8,7 +10,7 @@ import SinglePage from './pages/SinglePage';
 import WritePage from './pages/WritePage';
 
 function App() {
-  const currentUser = true;
+  const {user} = useContext(Context);
 
   return (
     <Router>
@@ -21,19 +23,19 @@ function App() {
           <HomePage />
         </Route>
         <Route path="/register">
-          {currentUser ? <HomePage /> : <RegisterPage />}
+          {user ? <HomePage /> : <RegisterPage />}
         </Route>
         <Route path="/login">
-        {currentUser ? <HomePage /> : <LoginPage />}
+        {user ? <HomePage /> : <LoginPage />}
         </Route>
         <Route path="/post/:id">
           <SinglePage />
         </Route>  
         <Route path="/write">
-        {currentUser ? <WritePage /> : <LoginPage />}
+        {user ? <WritePage /> : <LoginPage />}
         </Route>  
         <Route path="/settings">
-        {currentUser ? <SettingsPage /> : <LoginPage />}
+        {user ? <SettingsPage /> : <LoginPage />}
         </Route>
       </Switch>
     </Router>
