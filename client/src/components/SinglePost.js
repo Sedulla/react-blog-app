@@ -61,12 +61,49 @@ const Description = styled.p`
   }
 `;
 
+const TitleInput = styled.input`
+  margin: 10px;
+  font-size: 28px;
+  text-align: center;
+  border: none;
+  color: gray;
+  border-bottom: 1px solid lightgray;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const TextInput = styled.textarea`
+  border: none;
+  color: #555;
+  font-size: 18px;
+  line-height: 25px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const UpdateButton = styled.button`
+  width: 100px;
+  border: none;
+  background-color: teal;
+  padding: 5px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 20px;
+`;
+
 const SinglePost = () => {
   const location = useLocation();
   const path = location.pathname.split('/')[2];
   const [post, setPost] = useState({});
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
+  const [updateMode, setUpdateMode] = useState(false);
   const PF = 'http://localhost:5000/images/';
   const { user } = useContext(Context);
 
@@ -89,24 +126,47 @@ const SinglePost = () => {
     } catch (err) {}
   };
 
+  const handleUpdate = async () => {
+    try {
+      await axios.put(`/posts/${post._id}`, {
+        username: user.name,
+        title,
+        desc,
+      });
+      setUpdateMode(false);
+    } catch (err) {}
+  };
+
   return (
     <Container>
       <Wrapper>
         {post.photo && <Image src={PF + post.photo} />}
-        <Title>
-          {title}
-          {post.username === user?.username && (
-            <EditIcons>
-              <Edit sx={{ ml: 1, cursor: 'pointer', color: 'teal' }} />
-              <Delete
-                sx={{ ml: 1, cursor: 'pointer', color: 'tomato' }}
-                onClick={handleDelete}
-              />
-            </EditIcons>
-          )}
-        </Title>
+        {updateMode ? (
+          <TitleInput
+            type="text"
+            value={title}
+            autoFocus
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        ) : (
+          <Title>
+            {title}
+            {post.username === user?.username && (
+              <EditIcons>
+                <Edit
+                  sx={{ ml: 1, cursor: 'pointer', color: 'teal' }}
+                  onClick={() => setUpdateMode(true)}
+                />
+                <Delete
+                  sx={{ ml: 1, cursor: 'pointer', color: 'tomato' }}
+                  onClick={handleDelete}
+                />
+              </EditIcons>
+            )}
+          </Title>
+        )}
         <Info>
-          <Author value={desc}>
+          <Author>
             Author:
             <Link to={`/?user=$post{post.username}`} className="link">
               <b>{post.username}</b>
@@ -114,7 +174,14 @@ const SinglePost = () => {
           </Author>
           <Span>{new Date(post.date).toDateString()}</Span>
         </Info>
-        <Description>{post.desc}</Description>
+        {updateMode ? (
+          <TextInput value={desc} onChange={(e) => setDesc(e.target.value)} />
+        ) : (
+          <Description>{post.desc}</Description>
+        )}
+        {updateMode && (
+          <UpdateButton onClikc={handleUpdate}>Update</UpdateButton>
+        )}
       </Wrapper>
     </Container>
   );
