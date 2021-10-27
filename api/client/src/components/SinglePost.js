@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Delete, Edit } from '@mui/icons-material';
 import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import {axiosInstance} from '../config';
 import { Context } from '../context/Context';
 
 const Container = styled.div`
@@ -109,7 +109,7 @@ const SinglePost = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get('/posts/', path);
+      const res = await axiosInstance.get('/posts/', path);
       setPost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.desc);
@@ -119,7 +119,7 @@ const SinglePost = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${post._id}`, {
+      await axiosInstance.delete(`/posts/${post._id}`, {
         data: { username: user.name },
       });
       window.location.replace('/');
@@ -128,7 +128,7 @@ const SinglePost = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`/posts/${post._id}`, {
+      await axiosInstance.put(`/posts/${post._id}`, {
         username: user.name,
         title,
         desc,
