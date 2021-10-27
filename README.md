@@ -1,4 +1,4 @@
-№ REACT BLOG APP
+# REACT BLOG APP
 ## Home Page
 ![image](https://user-images.githubusercontent.com/67521243/137536310-b74949a7-e8b3-4ba1-9234-7123f8d8e25d.png)
 ## Single Post Page
