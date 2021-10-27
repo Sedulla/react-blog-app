@@ -8,8 +8,6 @@
 ## Settings Page
 ![image](https://user-images.githubusercontent.com/67521243/137536930-03a0318b-b36e-4c49-8719-cc844fdd68fe.png)
 
-
-
 # Getting Started with New React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
