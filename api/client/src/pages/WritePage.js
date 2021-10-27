@@ -1,7 +1,7 @@
 import { Add } from '@mui/icons-material';
-import axios from 'axios';
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { axiosInstance } from '../config';
 import { Context } from '../context/Context';
 
 const Container = styled.div`
@@ -100,11 +100,11 @@ const Write = () => {
       newPost.photo = filename;
 
       try {
-        await axios.post('/upload', data);
+        await axiosInstance.post('/upload', data);
       } catch (err) {}
     }
     try {
-      const res = await axios.post('/posts', newPost);
+      const res = await axiosInstance.post('/posts', newPost);
       window.location.replace('/post/' + res.data._id);
     } catch (err) {}
   };

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Posts from '../components/Posts';
 import SideSection from '../components/SideSection';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useLocation } from 'react-router';
+import { axiosInstance } from '../config';
 
 const Home = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get('/posts' + search);
+      const res = await axiosInstance.get('/posts' + search);
       setPosts(res.data);
     };
     fetchPosts();

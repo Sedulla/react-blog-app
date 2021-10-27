@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Facebook, Instagram, Pinterest, Twitter } from '@mui/icons-material';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import axios from 'axios';
+import { axiosInstance } from '../config';
 
 const Container = styled.div`
   flex: 3;
@@ -72,7 +72,7 @@ const SideSection = () => {
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get('./categories');
+      const res = await axiosInstance.get('./categories');
       setCats(res.data);
     };
     getCats();

@@ -14,11 +14,8 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "client-install": "yarn add --prefix client",
     "start": "node index.js",
-    "server": "nodemon index.js",
-    "client": "yarn start --prefix client",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\""
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",

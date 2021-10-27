@@ -3,7 +3,7 @@ import SideSection from '../components/SideSection';
 import { AccountCircle } from '@mui/icons-material';
 import { useState } from 'react';
 import { useContext } from 'react';
-import axios from 'axios';
+import { axiosInstance } from '../config';
 
 const Container = styled.div`
   display: flex;
@@ -119,11 +119,11 @@ const SettingsPage = () => {
       updatedUser.profilePicture = filename;
 
       try {
-        await axios.post('/upload', data);
+        await axiosInstance.post('/upload', data);
       } catch (err) {}
     }
     try {
-      const res = await axios.put('/users/' + user._id, updatedUser);
+      const res = await axiosInstance.put('/users/' + user._id, updatedUser);
       setSuccess(true);
       dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
     } catch (err) {

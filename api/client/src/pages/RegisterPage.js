@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { axiosInstance } from '../config';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -73,7 +73,7 @@ const RegisterPage = () => {
     setError(false);
 
     try {
-      const res = await axios.post('/auth/register', {
+      const res = await axiosInstance.post('/auth/register', {
         username,
         email,
         password,
