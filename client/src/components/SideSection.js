@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Facebook, Instagram, Pinterest, Twitter } from '@mui/icons-material';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { axiosInstance } from '../config';
+import { axiosInstance } from '../utils/config';
 
 const Container = styled.div`
   flex: 3;
@@ -67,7 +67,7 @@ const SocialIcons = styled.li`
   justify-content: center;
 `;
 
-const SideSection = () => {
+export const SideSection = () => {
   const [cats, setCats] = useState([]);
 
   useEffect(() => {
@@ -131,5 +131,3 @@ const SideSection = () => {
     </Container>
   );
 };
-
-export default SideSection;

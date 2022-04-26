@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { axiosInstance } from '../utils/config';
 import styled from 'styled-components';
-import { axiosInstance } from '../config';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -62,7 +62,7 @@ const RegisterButton = styled(Button)`
   text-align: center;
 `;
 
-const RegisterPage = () => {
+export const SignUp = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -117,5 +117,3 @@ const RegisterPage = () => {
     </Container>
   );
 };
-
-export default RegisterPage;

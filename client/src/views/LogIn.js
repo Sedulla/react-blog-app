@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react';
 import styled from 'styled-components';
-import { axiosInstance } from '../config';
+import { axiosInstance } from '../utils/config';
 import { Context } from '../context/Context';
 
 const Container = styled.div`
@@ -68,7 +68,7 @@ const RegisterButton = styled(Button)`
   background-color: #008080;
 `;
 
-const LoginPage = () => {
+export const LogIn = () => {
   const userRef = useRef();
   const passwordRef = useRef();
   const { dispatch, isFetching } = useContext(Context);
@@ -103,5 +103,3 @@ const LoginPage = () => {
     </Container>
   );
 };
-
-export default LoginPage;

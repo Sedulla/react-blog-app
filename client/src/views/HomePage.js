@@ -1,16 +1,16 @@
-import Header from '../components/Header';
-import styled from 'styled-components';
-import Posts from '../components/Posts';
-import SideSection from '../components/SideSection';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { axiosInstance } from '../config';
+import { axiosInstance } from '../utils/config';
+import styled from 'styled-components';
+import { Header } from '../components/Header';
+import { SideSection } from '../components/SideSection';
+import { Posts } from '../components/Posts';
 
 const Home = styled.div`
   display: flex;
 `;
 
-const HomePage = () => {
+export const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const { search } = useLocation();
 
@@ -32,5 +32,3 @@ const HomePage = () => {
     </>
   );
 };
-
-export default HomePage;

@@ -68,7 +68,7 @@ const Image = styled.img`
   cursor: pointer;
 `;
 
-const Nav = () => {
+export const Nav = () => {
   const { user, dispatch } = useContext(Context);
   const PF = 'http://localhost:5000/images/';
 
@@ -159,5 +159,3 @@ const Nav = () => {
     </Container>
   );
 };
-
-export default Nav;

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import SideSection from '../components/SideSection';
-import SinglePost from '../components/SinglePost';
+import { SideSection } from '../components/SideSection';
+import { SinglePost } from '../components/SinglePost';
 
 const Container = styled.div`
   display: flex;
 `;
 
-const SinglePage = () => {
+export const SinglePage = () => {
   return (
     <Container>
       <SinglePost />
@@ -14,5 +14,3 @@ const SinglePage = () => {
     </Container>
   );
 };
-
-export default SinglePage;

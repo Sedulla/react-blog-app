@@ -1,10 +1,10 @@
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Context } from '../context/Context';
+import { axiosInstance } from '../utils/config';
 import styled from 'styled-components';
 import { Delete, Edit } from '@mui/icons-material';
-import { useContext, useEffect, useState } from 'react';
-import {axiosInstance} from '../config';
-import { Context } from '../context/Context';
 
 const Container = styled.div`
   flex: 9;
@@ -97,7 +97,7 @@ const UpdateButton = styled.button`
   margin-top: 20px;
 `;
 
-const SinglePost = () => {
+export const SinglePost = () => {
   const location = useLocation();
   const path = location.pathname.split('/')[2];
   const [post, setPost] = useState({});
@@ -186,5 +186,3 @@ const SinglePost = () => {
     </Container>
   );
 };
-
-export default SinglePost;

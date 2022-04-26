@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Post from './Post';
+import { Post } from './Post';
 
 const Container = styled.div`
   flex: 9;
@@ -8,14 +8,12 @@ const Container = styled.div`
   margin: 20px;
 `;
 
-const Posts = ({ posts }) => {
+export const Posts = ({ posts }) => {
   return (
     <Container>
-      {posts.map((p) => (
-        <Post post={p} />
+      {posts.map((post) => (
+        <Post post={post} />
       ))}
     </Container>
   );
 };
-
-export default Posts;

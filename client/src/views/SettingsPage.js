@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import SideSection from '../components/SideSection';
+import { SideSection } from '../components/SideSection';
 import { AccountCircle } from '@mui/icons-material';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { axiosInstance } from '../config';
+import { axiosInstance } from '../utils/config';
 
 const Container = styled.div`
   display: flex;
@@ -91,7 +91,7 @@ const SubmitButton = styled.button`
 
 const Span = styled.span``;
 
-const SettingsPage = () => {
+export const SettingsPage = () => {
   const [file, setFile] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -205,5 +205,3 @@ const SettingsPage = () => {
     </Container>
   );
 };
-
-export default SettingsPage;

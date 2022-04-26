@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -32,7 +31,7 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const Header = () => {
+export const Header = () => {
   return (
     <Container>
       <Titles>
@@ -43,5 +42,3 @@ const Header = () => {
     </Container>
   );
 };
-
-export default Header;

@@ -67,7 +67,7 @@ const Description = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-const Post = ({ post }) => {
+export const Post = ({ post }) => {
   const PF = 'http://localhost:5000/images/';
 
   return (
@@ -89,5 +89,3 @@ const Post = ({ post }) => {
     </Container>
   );
 };
-
-export default Post;

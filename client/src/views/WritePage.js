@@ -1,8 +1,8 @@
 import { Add } from '@mui/icons-material';
 import { useContext, useState } from 'react';
-import styled from 'styled-components';
-import { axiosInstance } from '../config';
+import { axiosInstance } from '../utils/config';
 import { Context } from '../context/Context';
+import styled from 'styled-components';
 
 const Container = styled.div`
   padding-top: 50px;
@@ -78,7 +78,7 @@ const SubmitButton = styled.button`
   align-items: center;
 `;
 
-const Write = () => {
+export const Write = () => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [file, setFile] = useState('');
@@ -156,5 +156,3 @@ const Write = () => {
     </Container>
   );
 };
-
-export default Write;
