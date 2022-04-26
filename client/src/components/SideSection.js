@@ -84,8 +84,7 @@ export const SideSection = () => {
         <Title>ABOUT ME</Title>
         <Image src="https://i.ibb.co/p3xdqc3/about-me.jpg"></Image>
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quae
-          sapiente voluptatum sectetur adipisicing.
+          Some text here.
         </Text>
       </Item>
 

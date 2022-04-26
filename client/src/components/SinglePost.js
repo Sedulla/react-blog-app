@@ -180,7 +180,7 @@ export const SinglePost = () => {
           <Description>{post.desc}</Description>
         )}
         {updateMode && (
-          <UpdateButton onClikc={handleUpdate}>Update</UpdateButton>
+          <UpdateButton onClick={handleUpdate}>Update</UpdateButton>
         )}
       </Wrapper>
     </Container>
