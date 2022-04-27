@@ -1,9 +1,14 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Facebook, Instagram, Pinterest, Twitter } from '@mui/icons-material';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { axiosInstance } from '../utils/config';
+import {
+  FaPinterest as PinterestIcon,
+  FaTwitter as TwitterIcon,
+  FaFacebook as FacebookIcon,
+  FaInstagram as InstagramIcon,
+} from 'react-icons/fa';
+import { apiBaseUrl } from '../utils/config';
+import axios from 'axios';
 
 const Container = styled.div`
   flex: 3;
@@ -68,12 +73,12 @@ const SocialIcons = styled.li`
 `;
 
 export const SideSection = () => {
-  const [cats, setCats] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axiosInstance.get('./categories');
-      setCats(res.data);
+      const res = await axios.get('/categories');
+      setCategories(res.data);
     };
     getCats();
   }, []);
@@ -82,18 +87,16 @@ export const SideSection = () => {
     <Container>
       <Item>
         <Title>ABOUT ME</Title>
-        <Image src="https://i.ibb.co/p3xdqc3/about-me.jpg"></Image>
-        <Text>
-          Some text here.
-        </Text>
+        <Image src="https://i.ibb.co/p3xdqc3/about-me.jpg" />
+        <Text>Some text here.</Text>
       </Item>
 
       <Item>
         <Title>CATEGORIES</Title>
         <List>
-          {cats.map((c) => (
-            <Link to={`/?cat=${c.name}`} className="link">
-              <ListItem>{c.name}</ListItem>
+          {categories.map((category) => (
+            <Link to={`/?cat=${category.name}`} className="link">
+              <ListItem>{category.name}</ListItem>
             </Link>
           ))}
         </List>
@@ -101,25 +104,25 @@ export const SideSection = () => {
       <Item>
         <Title>FOLLOW US</Title>
         <SocialIcons>
-          <Facebook
+          <FacebookIcon
             sx={{
               fontSize: 16,
               ml: 2,
             }}
           />
-          <Instagram
+          <InstagramIcon
             sx={{
               fontSize: 16,
               ml: 2,
             }}
           />
-          <Pinterest
+          <PinterestIcon
             sx={{
               fontSize: 16,
               ml: 2,
             }}
           />
-          <Twitter
+          <TwitterIcon
             sx={{
               fontSize: 20,
               ml: 2,

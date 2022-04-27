@@ -1,5 +1,1 @@
-import axios from 'axios';
-
-export const axiosInstance = axios.create({
-  baseURL: 'https://react-blog-app-rest-api.herokuapp.com/api/',
-});
+export const apiBaseUrl = 'http://localhost:7000/api/';

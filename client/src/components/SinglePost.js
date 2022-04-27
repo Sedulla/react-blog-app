@@ -1,10 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
-import { axiosInstance } from '../utils/config';
+import { apiBaseUrl } from '../utils/config';
 import styled from 'styled-components';
-import { Delete, Edit } from '@mui/icons-material';
+import {
+  FaMinusCircle as MinusCircleIcon,
+  FaEdit as EditIcon,
+} from 'react-icons/fa';
+import axios from 'axios';
 
 const Container = styled.div`
   flex: 9;
@@ -29,7 +33,7 @@ const Title = styled.h1`
   font-family: serif;
   font-weight: normal;
 `;
-const EditIcons = styled.div`
+const Icons = styled.div`
   float: right;
   font-size: 16px;
 `;
@@ -104,12 +108,13 @@ export const SinglePost = () => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [updateMode, setUpdateMode] = useState(false);
-  const PF = 'http://localhost:5000/images/';
+  // const PF = 'http://localhost:7000/images/';
   const { user } = useContext(Context);
+  const history = useHistory();
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axiosInstance.get('/posts/', path);
+      const res = await axios.get('/posts/', path);
       setPost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.desc);
@@ -119,17 +124,17 @@ export const SinglePost = () => {
 
   const handleDelete = async () => {
     try {
-      await axiosInstance.delete(`/posts/${post._id}`, {
-        data: { username: user.name },
+      await axios.delete(`/posts/${post._id}`, {
+        data: { username: user.username },
       });
-      window.location.replace('/');
+      history.push('/');
     } catch (err) {}
   };
 
   const handleUpdate = async () => {
     try {
-      await axiosInstance.put(`/posts/${post._id}`, {
-        username: user.name,
+      await axios.put(`/posts/${post._id}`, {
+        username: user.username,
         title,
         desc,
       });
@@ -140,7 +145,7 @@ export const SinglePost = () => {
   return (
     <Container>
       <Wrapper>
-        {post.photo && <Image src={PF + post.photo} />}
+        {/* {post.photo && <Image src={PF + post.photo} />} */}
         {updateMode ? (
           <TitleInput
             type="text"
@@ -152,23 +157,23 @@ export const SinglePost = () => {
           <Title>
             {title}
             {post.username === user?.username && (
-              <EditIcons>
-                <Edit
+              <Icons>
+                <EditIcon
                   sx={{ ml: 1, cursor: 'pointer', color: 'teal' }}
                   onClick={() => setUpdateMode(true)}
                 />
-                <Delete
+                <MinusCircleIcon
                   sx={{ ml: 1, cursor: 'pointer', color: 'tomato' }}
                   onClick={handleDelete}
                 />
-              </EditIcons>
+              </Icons>
             )}
           </Title>
         )}
         <Info>
           <Author>
             Author:
-            <Link to={`/?user=$post{post.username}`} className="link">
+            <Link to={`/?user=${post.username}`} className="link">
               <b>{post.username}</b>
             </Link>
           </Author>

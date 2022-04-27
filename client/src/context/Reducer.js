@@ -42,6 +42,7 @@ export const Reducer = (state, action) => {
         isFetching: false,
         error: false,
       };
+      
     default:
       return state;
   }

@@ -68,15 +68,15 @@ const Description = styled.p`
 `;
 
 export const Post = ({ post }) => {
-  const PF = 'http://localhost:5000/images/';
+  // const PF = 'http://localhost:7000/images/';
 
   return (
     <Container>
-      {post.photo && <Image src={PF + post.photo} alt="" />}
+      {/* {post.photo && <Image src={PF + post.photo} alt="" />} */}
       <Info>
         <Categories>
-          {post.categories.map((c) => (
-            <Category>{c.name}</Category>
+          {post.categories.map((category) => (
+            <Category>{category.name}</Category>
           ))}
         </Categories>
         <Link className="link" to={`/post/${post._id}`}>

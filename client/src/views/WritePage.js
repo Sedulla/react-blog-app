@@ -1,8 +1,10 @@
-import { Add } from '@mui/icons-material';
 import { useContext, useState } from 'react';
-import { axiosInstance } from '../utils/config';
+import { useHistory } from 'react-router-dom';
+import { FaPlus as PlusIcon } from 'react-icons/fa';
 import { Context } from '../context/Context';
 import styled from 'styled-components';
+import { apiBaseUrl } from '../utils/config';
+import axios from 'axios';
 
 const Container = styled.div`
   padding-top: 50px;
@@ -27,6 +29,7 @@ const FormGroup = styled.div`
 `;
 
 const LabelForFileInput = styled.label``;
+
 const FileInput = styled.input``;
 
 const TitleInput = styled.input`
@@ -81,13 +84,14 @@ const SubmitButton = styled.button`
 export const Write = () => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState(null);
   const { user } = useContext(Context);
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = {
-      username: user.name,
+      username: user.username,
       title,
       desc,
     };
@@ -100,12 +104,12 @@ export const Write = () => {
       newPost.photo = filename;
 
       try {
-        await axiosInstance.post('/upload', data);
+        await axios.post('/upload', data);
       } catch (err) {}
     }
     try {
-      const res = await axiosInstance.post('/posts', newPost);
-      window.location.replace('/post/' + res.data._id);
+      const res = await axios.post('/posts', newPost);
+      history.push('/post/' + res.data._id);
     } catch (err) {}
   };
 
@@ -115,7 +119,7 @@ export const Write = () => {
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <LabelForFileInput htmlFor="fileInput">
-            <Add
+            <PlusIcon
               sx={{
                 width: 25,
                 height: 25,

@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { axiosInstance } from '../utils/config';
+import { useHistory } from 'react-router-dom';
+import { apiBaseUrl } from '../utils/config';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -66,19 +68,20 @@ export const SignUp = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(false);
 
     try {
-      const res = await axiosInstance.post('/auth/register', {
+      const res = await axios.post('/auth/signup', {
         username,
         email,
         password,
       });
-      res.data && window.location.replace('/login');
+      res.data && history.push('/login');
     } catch (err) {
       setError(true);
     }
@@ -110,7 +113,7 @@ export const SignUp = () => {
       </Form>
       <LoginButton>Login</LoginButton>
       {error && (
-        <span style={{ color: 'red', marginTop: '10px' }}>
+        <span style={{ color: 'brown', marginTop: '9px' }}>
           Something went wrong!
         </span>
       )}

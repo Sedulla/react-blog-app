@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  Facebook,
-  Instagram,
-  Pinterest,
-  Twitter,
-  Search,
-} from '@mui/icons-material';
+  FaPinterest as PinterestIcon,
+  FaTwitter as TwitterIcon,
+  FaFacebook as FacebookIcon,
+  FaInstagram as InstagramIcon,
+  FaSearch as SearchIcon,
+} from 'react-icons/fa';
 import { useContext } from 'react';
 import { Context } from '../context/Context';
 
@@ -70,7 +70,7 @@ const Image = styled.img`
 
 export const Nav = () => {
   const { user, dispatch } = useContext(Context);
-  const PF = 'http://localhost:5000/images/';
+  // const PF = 'http://localhost:7000/images/';
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -79,7 +79,7 @@ export const Nav = () => {
   return (
     <Container>
       <Left>
-        <Facebook
+        <FacebookIcon
           sx={{
             fontSize: 20,
             mr: 1,
@@ -87,7 +87,7 @@ export const Nav = () => {
             cursor: 'pointer',
           }}
         />
-        <Instagram
+        <InstagramIcon
           sx={{
             fontSize: 20,
             mr: 1,
@@ -95,7 +95,7 @@ export const Nav = () => {
             cursor: 'pointer',
           }}
         />
-        <Pinterest
+        <PinterestIcon
           sx={{
             fontSize: 20,
             mr: 1,
@@ -103,7 +103,7 @@ export const Nav = () => {
             cursor: 'pointer',
           }}
         />
-        <Twitter
+        <TwitterIcon
           sx={{
             fontSize: 20,
             mr: 1,
@@ -132,7 +132,7 @@ export const Nav = () => {
       <Right>
         {user ? (
           <Link className="link" to="/settings">
-            <Image src={PF + user.profilePicture}></Image>
+            {/* <Image src={PF + user.profilePicture}></Image> */}
           </Link>
         ) : (
           <Menu>
@@ -142,13 +142,13 @@ export const Nav = () => {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className="link" to="/register">
+              <Link className="link" to="/signup">
                 REGISTER
               </Link>
             </MenuItem>
           </Menu>
         )}
-        <Search
+        <SearchIcon
           sx={{
             fontSize: 24,
             color: '#666',

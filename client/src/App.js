@@ -20,16 +20,13 @@ export const App = () => {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route path="/posts">
-          <HomePage />
-        </Route>
-        <Route path="/register">{user ? <HomePage /> : <SignUp />}</Route>
+        <Route path="/signup">{user ? <HomePage /> : <SignUp />}</Route>
         <Route path="/login">{user ? <HomePage /> : <LogIn />}</Route>
         <Route path="/post/:id">
           <SinglePage />
         </Route>
-        <Route path="/write">{user ? <Write /> : <LogIn />}</Route>
-        <Route path="/settings">{user ? <SettingsPage /> : <LogIn />}</Route>
+        <Route path="/write">{user ? <Write /> : <SignUp />}</Route>
+        <Route path="/settings">{user ? <SettingsPage /> : <SignUp />}</Route>
       </Switch>
     </Router>
   );

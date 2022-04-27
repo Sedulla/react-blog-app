@@ -1,7 +1,8 @@
 import { useContext, useRef } from 'react';
 import styled from 'styled-components';
-import { axiosInstance } from '../utils/config';
+import { apiBaseUrl } from '../utils/config';
 import { Context } from '../context/Context';
+import axios from 'axios';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -77,7 +78,7 @@ export const LogIn = () => {
     e.preventDefault();
     dispatch({ type: 'LOGIN_START' });
     try {
-      const res = await axiosInstance.post('/auth/login', {
+      const res = await axios.post('/auth/login', {
         username: userRef.current.value,
         password: passwordRef.current.value,
       });
@@ -96,10 +97,10 @@ export const LogIn = () => {
         <Label>Password</Label>
         <Input type="password" placeholder="Enter your password..." />
         <LoginButton type="submit" disabled={isFetching}>
-          Login
+          Log in here
         </LoginButton>
       </Form>
-      <RegisterButton>Register</RegisterButton>
+      <RegisterButton>Sign up now</RegisterButton>
     </Container>
   );
 };

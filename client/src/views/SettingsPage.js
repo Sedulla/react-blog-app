@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { SideSection } from '../components/SideSection';
-import { AccountCircle } from '@mui/icons-material';
+import { FaFacebook as FacebookIcon} from 'react-icons/fa';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { axiosInstance } from '../utils/config';
+import { apiBaseUrl } from '../utils/config';
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -92,14 +93,14 @@ const SubmitButton = styled.button`
 const Span = styled.span``;
 
 export const SettingsPage = () => {
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState(null);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
 
   const { user, dispatch } = useContext(useContext);
-  const PF = 'http://localhost:5000/images/';
+  // const PF = 'http://localhost:7000/images/';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,11 +120,11 @@ export const SettingsPage = () => {
       updatedUser.profilePicture = filename;
 
       try {
-        await axiosInstance.post('/upload', data);
+        await axios.post('/upload', data);
       } catch (err) {}
     }
     try {
-      const res = await axiosInstance.put('/users/' + user._id, updatedUser);
+      const res = await axios.put('/users/' + user._id, updatedUser);
       setSuccess(true);
       dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
     } catch (err) {
@@ -142,11 +143,11 @@ export const SettingsPage = () => {
           <Label>Profile Picture</Label>
           <ProfilePicture>
             <PPImage
-              src={file ? URL.createObjectURL(file) : PF + user.profilePicture}
+              // src={file ? URL.createObjectURL(file) : PF + user.profilePicture}
               alt=""
             ></PPImage>
             <LabelForFileInput htmlFor="fileInput">
-              <AccountCircle
+              <FacebookIcon
                 sx={{
                   width: '20px',
                   height: '20px',
